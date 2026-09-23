@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f5f8fa">
+<title>Anchor — Livre de bord & entretien</title>
+<style>
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+:root{
+  --bg:#f5f8fa; --card:#ffffff; --ink:#0e2433; --sub:#5b7285; --faint:#9bb0c0;
+  --line:#e6edf2; --line2:#d8e2e9;
+  --blue:#0a7cff; --blue2:#0a64d8; --teal:#0ec4b4; --mint:#0fb57d;
+  --amber:#f5a623; --coral:#ff5a76; --purple:#8b6cf0;
+  --bluebg:#eaf3ff; --tealbg:#e2f8f5; --mintbg:#e4f8ef; --amberbg:#fdf3e0; --coralbg:#ffeef1; --purplebg:#f1edfd;
+  --r-xl:20px; --r-lg:16px; --r-md:12px; --r-sm:9px;
+  --shadow:0 2px 10px rgba(14,36,51,.06);
+  --shadow2:0 10px 30px rgba(14,36,51,.10);
+  --font:"Satoshi","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:var(--font);color:var(--ink);min-height:100vh;padding-bottom:28px;
+  background:var(--bg);letter-spacing:.005em;
+  background-image:radial-gradient(rgba(10,124,255,.035) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+/* ============ header ============ */
+header{
+  position:sticky;top:0;z-index:40;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hd{max-width:660px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:12px}
+.mark{
+  width:42px;height:42px;border-radius:13px;flex:none;
+  background:linear-gradient(135deg,#0a7cff,#0ec4b4);
+  display:grid;place-items:center;box-shadow:0 6px 16px rgba(10,124,255,.35);
+}
+.brand{flex:1;min-width:0}
+.brand h1{font-size:1.12rem;font-weight:800;letter-spacing:.14em;color:var(--ink)}
+.brand .tag{font-size:.66rem;color:var(--sub);letter-spacing:.09em;text-transform:uppercase;font-weight:600}
+.hd-boat{font-size:.74rem;color:var(--sub);font-weight:700;background:var(--bluebg);color:var(--blue);
+  border:1px solid #d4e6ff;padding:6px 12px;border-radius:99px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
+/* ============ layout ============ */
+main{max-width:660px;margin:0 auto;padding:16px 16px 6px}
+h2{
+  font-size:.72rem;font-weight:800;color:var(--faint);
+  text-transform:uppercase;letter-spacing:.13em;margin:24px 4px 11px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+h2 .cnt{font-size:.68rem;color:var(--sub);font-weight:700}
+/* ============ hero ============ */
+.hero{
+  background:linear-gradient(135deg,#0a7cff,#0ec4b4);
+  border-radius:var(--r-xl);padding:20px 20px 18px;color:#fff;
+  box-shadow:0 14px 34px rgba(10,124,255,.30);
+  margin-bottom:14px;position:relative;overflow:hidden;
+}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;
+  border-radius:50%;background:rgba(255,255,255,.14)}
+.hero::before{content:"";position:absolute;right:30px;bottom:-55px;width:120px;height:120px;
+  border-radius:50%;background:rgba(255,255,255,.10)}
+.hero .hrow{display:flex;gap:18px;align-items:center;flex-wrap:wrap;position:relative;z-index:1}
+.hstat .v{font-size:1.7rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.hstat .v small{font-size:.85rem;font-weight:600;opacity:.85}
+.hstat .l{font-size:.6rem;opacity:.85;text-transform:uppercase;letter-spacing:.11em;font-weight:700;margin-top:4px}
+.hdiv{width:1px;height:38px;background:rgba(255,255,255,.28)}
+.hero .alert{
+  margin-top:14px;padding:9px 14px;border-radius:11px;background:rgba(0,0,0,.18);
+  font-size:.78rem;font-weight:700;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+/* ============ segmented ============ */
+.seg{
+  display:flex;gap:4px;padding:4px;margin-bottom:18px;
+  background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+}
+.seg button{
+  flex:1;padding:10px 4px;border:none;border-radius:11px;background:transparent;
+  color:var(--sub);font-family:var(--font);font-size:.86rem;font-weight:700;cursor:pointer;
+  transition:all .18s ease;
+}
+.seg button.on{background:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(10,124,255,.35)}
+/* ============ cards & forms ============ */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:18px;margin-bottom:12px;box-shadow:var(--shadow)}
+label{display:block;font-size:.63rem;color:var(--faint);margin:13px 0 5px;
+  text-transform:uppercase;letter-spacing:.11em;font-weight:800}
+label:first-child, .row label:first-child{margin-top:0}
+input,select,textarea{
+  width:100%;padding:11px 13px;background:#f8fafc;border:1.5px solid var(--line2);
+  border-radius:var(--r-md);color:var(--ink);font-family:var(--font);font-size:.93rem;font-weight:500;
+  transition:border .18s,box-shadow .18s,background .18s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);background:#fff;
+  box-shadow:0 0 0 3px rgba(10,124,255,.13)}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235b7285' stroke-width='1.7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+textarea{resize:vertical;min-height:56px}
+::placeholder{color:var(--faint)}
+.row{display:flex;gap:10px}
+.row>div{flex:1;min-width:0}
+/* ============ buttons ============ */
+.btn{width:100%;margin-top:16px;padding:13px;border:none;border-radius:13px;
+  font-family:var(--font);font-size:.95rem;font-weight:800;cursor:pointer;transition:all .16s ease}
+.btn:active{transform:scale(.985)}
+.btn.primary{background:linear-gradient(135deg,#0a7cff,#0a64d8);color:#fff;
+  box-shadow:0 8px 20px rgba(10,124,255,.35)}
+.btn.teal{background:linear-gradient(135deg,#0ec4b4,#0b9e93);color:#fff;box-shadow:0 8px 20px rgba(14,196,180,.30)}
+.btn.soft{background:#fff;border:1.5px solid var(--line2);color:var(--ink);font-size:.85rem;
+  padding:10px 14px;width:auto;box-shadow:var(--shadow)}
+.btn.soft:active{border-color:var(--blue);color:var(--blue)}
+.btn.mini{font-size:.72rem;padding:7px 13px;border-radius:99px;margin-top:0}
+.btn.dangertxt{color:var(--coral);border-color:#ffd4dc;background:#fff}
+/* ============ nav cards ============ */
+.navcard{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  margin-bottom:12px;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);
+  transition:transform .16s ease,box-shadow .18s ease;
+}
+.navcard:active{transform:scale(.99);box-shadow:var(--shadow2)}
+.nc-top{padding:15px 17px 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.nc-route{font-weight:800;font-size:.98rem;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.nc-route .arr{color:var(--blue)}
+.nc-date{font-size:.73rem;color:var(--sub);font-weight:600;margin-top:3px}
+.nc-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 17px 14px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:800;
+  padding:4px 10px;border-radius:99px}
+.chip.blue{background:var(--bluebg);color:var(--blue)}
+.chip.teal{background:var(--tealbg);color:#0b9e93}
+.chip.mint{background:var(--mintbg);color:var(--mint)}
+.chip.amber{background:var(--amberbg);color:#c47f00}
+.chip.coral{background:var(--coralbg);color:var(--coral)}
+.chip.purple{background:var(--purplebg);color:var(--purple)}
+.nc-stats{display:flex;border-top:1px solid var(--line);background:#fafcfe}
+.nc-stats div{flex:1;text-align:center;padding:10px 4px;border-right:1px solid var(--line)}
+.nc-stats div:last-child{border-right:none}
+.nc-stats .v{font-weight:800;font-size:.92rem;font-variant-numeric:tabular-nums}
+.nc-stats .l{font-size:.58rem;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-top:2px}
+/* ============ map ============ */
+.map{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;margin-bottom:12px;
+  border:1px solid var(--line);box-shadow:var(--shadow);
+  background:
+    radial-gradient(circle at 80% 15%, rgba(10,124,255,.10), transparent 55%),
+    linear-gradient(160deg,#e9f4fc 0%,#f2f7f5 100%);
+  min-height:210px;
+}
+.map svg{display:block;width:100%;height:210px}
+.map .mlegend{position:absolute;left:12px;bottom:10px;display:flex;gap:8px;flex-wrap:wrap}
+.map .ml{font-size:.62rem;font-weight:700;background:rgba(255,255,255,.85);padding:4px 10px;border-radius:99px;color:var(--sub)}
+/* ============ tasks ============ */
+.task{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:15px 16px;margin-bottom:10px;box-shadow:var(--shadow);display:flex;gap:13px;align-items:center}
+.tico{width:40px;height:40px;border-radius:12px;flex:none;display:grid;place-items:center;font-size:1.05rem}
+.tico.ok{background:var(--mintbg)} .tico.warn{background:var(--amberbg)} .tico.late{background:var(--coralbg)} .tico.info{background:var(--bluebg)}
+.tbody{flex:1;min-width:0}
+.tcat{font-size:.6rem;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;font-weight:800}
+.tname{font-weight:800;font-size:.92rem;margin-top:1px}
+.tnext{font-size:.73rem;color:var(--sub);margin-top:3px;font-weight:600}
+.tnext b{color:var(--ink)}
+.bar{height:7px;border-radius:99px;background:#eef3f6;overflow:hidden;margin-top:9px}
+.bar i{display:block;height:100%;border-radius:99px}
+.bar i.ok{background:linear-gradient(90deg,#0fb57d,#0ec4b4)}
+.bar i.warn{background:linear-gradient(90deg,#f5a623,#f08a00)}
+.bar i.late{background:linear-gradient(90deg,#ff5a76,#e63e5c)}
+.badge{display:inline-flex;padding:4px 11px;border-radius:99px;font-size:.62rem;font-weight:800;letter-spacing:.05em;white-space:nowrap}
+.badge.ok{background:var(--mintbg);color:var(--mint)}
+.badge.warn{background:var(--amberbg);color:#c47f00}
+.badge.late{background:var(--coralbg);color:var(--coral);animation:pulse 1.7s infinite}
+.badge.info{background:var(--bluebg);color:var(--blue)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,90,118,.30)}50%{box-shadow:0 0 0 6px rgba(255,90,118,0)}}
+.tbtn{flex:none;display:flex;flex-direction:column;gap:7px;align-items:flex-end}
+/* ============ readings ============ */
+.reading{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow);position:relative}
+.rhead{display:flex;justify-content:space-between;align-items:center}
+.rtime{font-weight:800;font-size:.92rem;display:flex;align-items:center;gap:7px}
+.rsrc{font-size:.62rem;font-weight:800;padding:3px 9px;border-radius:99px}
+.rsrc.obs{background:var(--bluebg);color:var(--blue)}
+.rsrc.est{background:var(--purplebg);color:var(--purple)}
+.rgrid{display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:9px;font-size:.8rem;color:var(--sub);font-weight:500}
+.rgrid b{color:var(--ink);font-weight:700}
+.wchip{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;
+  background:#f2f7fa;padding:3px 10px;border-radius:99px;color:var(--sub)}
+.avbox{margin-top:10px;padding:10px 13px;border-radius:var(--r-md);
+  background:var(--coralbg);border:1px solid #ffd0da;font-size:.8rem;color:var(--coral);font-weight:700}
+/* ============ lock screen ============ */
+#lock{
+  position:fixed;inset:0;z-index:200;background:var(--bg);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;
+}
+#lock.on{display:flex}
+#lock .lmark{width:64px;height:64px;border-radius:20px;background:linear-gradient(135deg,#0a7cff,#0ec4b4);
+  display:grid;place-items:center;box-shadow:0 10px 30px rgba(10,124,255,.35);margin-bottom:6px}
+#lock h3{font-size:1.05rem;font-weight:800}
+#lock .lsub{font-size:.8rem;color:var(--sub);text-align:center;line-height:1.5}
+.pindots{display:flex;gap:12px;margin:8px 0}
+.pindots i{width:14px;height:14px;border-radius:50%;background:#e6edf2;border:1.5px solid var(--line2);transition:all .15s}
+.pindots i.f{background:var(--blue);border-color:var(--blue);transform:scale(1.1)}
+.pinpad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:270px}
+.pinpad button{
+  height:64px;border:none;border-radius:18px;background:#fff;color:var(--ink);
+  font-family:var(--font);font-size:1.5rem;font-weight:800;cursor:pointer;
+  box-shadow:0 2px 10px rgba(14,36,51,.07);border:1px solid var(--line);
+  transition:all .12s;
+}
+.pinpad button:active{transform:scale(.94);background:var(--bluebg)}
+.pinpad button.ghost{background:transparent;border:none;box-shadow:none;font-size:1rem;color:var(--sub)}
+#lock .lerr{color:var(--coral);font-size:.8rem;font-weight:700;min-height:1.2em}
+/* ============ misc ============ */
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--blue);cursor:pointer;
+  font-size:.86rem;font-weight:800;margin:4px 4px 12px;padding:7px 14px;background:#fff;
+  border:1.5px solid var(--line2);border-radius:99px;box-shadow:var(--shadow)}
+.muted{color:var(--sub);font-size:.82rem;font-weight:500}
+.faint{color:var(--faint);font-size:.74rem}
+.empty{text-align:center;padding:44px 20px;color:var(--faint);border:2px dashed var(--line2);
+  border-radius:var(--r-xl);font-size:.88rem;line-height:1.7;margin-top:10px;background:rgba(255,255,255,.5)}
+.empty .big{font-size:2rem;display:block;margin-bottom:8px}
+.diag{font-size:.72rem;color:var(--sub);line-height:1.8;margin-top:10px;padding:12px 15px;
+  background:#f2f7fa;border-radius:var(--r-md);border:1px solid var(--line)}
+.datarow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+/* ============ dock ============ */
+.dock{position:sticky;bottom:0;margin-top:auto;z-index:50;
+  padding:8px 16px 46px;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(14,36,51,.07)}
+.dock-inner{max-width:660px;margin:0 auto;display:flex;gap:10px}
+.dock button{flex:1;padding:12px 8px;border:none;border-radius:13px;
+  font-family:var(--font);font-size:.84rem;font-weight:800;cursor:pointer;transition:all .16s}
+.dock button:active{transform:scale(.97)}
+.dock .j{background:#fff;border:1.5px solid var(--line2);color:var(--ink)}
+.dock .e{background:var(--amberbg);color:#c47f00;border:1.5px solid #f7e3bd}
+.dock .n{background:linear-gradient(135deg,#0a7cff,#0a64d8);color:#fff;flex:1.4;
+  box-shadow:0 8px 20px rgba(10,124,255,.35)}
+/* ============ toast ============ */
+#toast{position:fixed;bottom:140px;left:50%;transform:translateX(-50%) translateY(8px);
+  background:var(--ink);color:#fff;padding:12px 22px;border-radius:99px;font-size:.84rem;font-weight:700;
+  opacity:0;pointer-events:none;transition:all .25s ease;z-index:70;box-shadow:0 12px 30px rgba(14,36,51,.3);white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="hd">
+  <div class="mark">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 4v11M12 15c-3.4 0-5.3-2.2-5.5-4.8h11C17.7 12.8 15.4 15 12 15M8.5 19.5h7" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>
+      <circle cx="12" cy="3" r="1.6" fill="#fff"/>
+    </svg>
+  </div>
+  <div class="brand">
+    <h1>ANCHOR</h1>
+    <div class="tag">Livre de bord · Entretien</div>
+  </div>
+  <div class="hd-boat" id="hdboat">Mon voilier</div>
+</div></header>
+
+<main id="app"></main>
+
+<div class="dock"><div class="dock-inner">
+  <button class="j" onclick="go('journal')">📖 Journal</button>
+  <button class="n" onclick="go('newnav')">＋ Nouvelle nav</button>
+  <button class="e" onclick="go('entretien')">🔧 Entretien</button>
+</div></div>
+<div id="toast"></div>
+
+<div id="lock">
+  <div class="lmark">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+      <rect x="5" y="10" width="14" height="10" rx="2.5" stroke="#fff" stroke-width="2"/>
+      <path d="M8 10V7a4 4 0 018 0v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <h3 id="lk-title">Anchor est verrouillé</h3>
+  <div class="lsub" id="lk-sub">Saisis ton code PIN pour accéder à ton livre de bord.</div>
+  <div class="pindots" id="lk-dots"><i></i><i></i><i></i><i></i></div>
+  <div class="lerr" id="lk-err"></div>
+  <div class="pinpad" id="lk-pad"></div>
+</div>
+
+<script>
+"use strict";
+const VERSION="2.0";
+const DOUGLAS=["Calme","Ride","Belle","Peu agitée","Agitée","Forte","Très forte","Grosse","Très grosse","Énorme"];
+const BEAUFORT=["Calme","Très légère","Légère","Petite brise","Jolie brise","Bonne brise","Vent frais","Grand frais","Coup de vent","Fort coup de vent","Tempête","Violente tempête","Ouragan"];
+const SKY=["☀️ Ciel clair","🌤 Voilé","⛅ Nuages épars","☁️ Couvert","🌫 Brume","🌧 Pluie","🌦 Averse","⛈ Orage"];
+const CAT_ICONS={"Moteur":"⚙️","Transmission":"🔧","Coque":"🛥","Gréement":"⛵","Pont":"🪝","Électricité":"🔋","Sécurité":"🛟","Instruments":"📡"};
+const CATALOG=[
+ {id:"vidange",l:"Vidange huile + filtre",h:150,mo:12,cat:"Moteur"},
+ {id:"filgasoil",l:"Filtre gasoil + pré-filtre",h:250,mo:12,cat:"Moteur"},
+ {id:"filtreair",l:"Filtre à air",h:250,mo:12,cat:"Moteur"},
+ {id:"courroies",l:"Courroies (contrôle)",h:200,mo:12,cat:"Moteur"},
+ {id:"courroiealt",l:"Courroie alternateur",h:500,mo:24,cat:"Électricité"},
+ {id:"turbinec",l:"Turbine eau mer (contrôle)",h:null,mo:12,cat:"Moteur"},
+ {id:"turbiner",l:"Turbine eau mer (remplacement)",h:500,mo:24,cat:"Moteur"},
+ {id:"huileinv",l:"Huile sail-drive / inverseur",h:200,mo:12,cat:"Transmission"},
+ {id:"soufflet",l:"Soufflet sail-drive",h:null,mo:84,cat:"Transmission"},
+ {id:"anodesm",l:"Anodes moteur",h:null,mo:12,cat:"Coque"},
+ {id:"anodesc",l:"Anodes coque",h:null,mo:12,cat:"Coque"},
+ {id:"antifouling",l:"Antifouling",h:null,mo:12,cat:"Coque"},
+ {id:"coquec",l:"Contrôle coque (osmose)",h:null,mo:24,cat:"Coque"},
+ {id:"barre",l:"Système de barre / safran",h:null,mo:12,cat:"Coque"},
+ {id:"greementc",l:"Gréement dormant (contrôle)",h:null,mo:24,cat:"Gréement"},
+ {id:"greementr",l:"Gréement dormant (remplacement)",h:null,mo:120,cat:"Gréement"},
+ {id:"manilles",l:"Manilles & haubans",h:null,mo:12,cat:"Gréement"},
+ {id:"winchs",l:"Winchs (graissage)",h:null,mo:12,cat:"Pont"},
+ {id:"batteries",l:"Batteries (test capacité)",h:null,mo:12,cat:"Électricité"},
+ {id:"raideau",l:"Révision radeau de survie",h:null,mo:12,cat:"Sécurité"},
+ {id:"pyro",l:"Pyrotechnie (péremption)",h:null,mo:36,cat:"Sécurité"},
+ {id:"extinc",l:"Extincteurs (recharge)",h:null,mo:24,cat:"Sécurité"},
+ {id:"gaz",l:"Durites gaz + détendeur",h:null,mo:24,cat:"Sécurité"},
+ {id:"lochc",l:"Loch / sonde (étalonnage)",h:null,mo:24,cat:"Instruments"}
+];
+
+/* ============ storage ============ */
+function freshDB(){return{
+  boat:{name:"Mon voilier",model:"",year:"",engine:"",hours:0,nm:0,decl:0},
+  navs:[],tasks:CATALOG.map(t=>({...t,active:true})),interventions:[]};}
+let DB;
+try{const s=localStorage.getItem("anchor:v1");DB=s?JSON.parse(s):null;}catch(e){DB=null;}
+if(!DB||!DB.boat)DB=freshDB();
+DB.navs=DB.navs||[];DB.interventions=DB.interventions||[];
+if(!DB.tasks||!DB.tasks.length)DB.tasks=CATALOG.map(t=>({...t,active:true}));
+DB.navs.forEach(n=>{n.readings=n.readings||[];});
+function save(){try{localStorage.setItem("anchor:v1",JSON.stringify(DB));}catch(e){}}
+
+/* ============ PIN lock ============ */
+function pinHash(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))>>>0;return "p"+h.toString(36);}
+function getPin(){try{return localStorage.getItem("anchor:pin");}catch(e){return null;}}
+function setPin(h){try{h?localStorage.setItem("anchor:pin",h):localStorage.removeItem("anchor:pin");}catch(e){}}
+let lkMode="unlock",lkBuf="",lkConfirm="";
+function lockApp(){lkMode="unlock";lkBuf="";lkConfirm="";showLock();}
+function showLock(){
+  const lk=$("lock");
+  if(!getPin()){lk.classList.remove("on");return;}
+  lk.classList.add("on");
+  $("lk-title").textContent=lkMode==="setup"?"Choisis ton code PIN":lkMode==="confirm"?"Confirme ton code PIN":"Anchor est verrouillé";
+  $("lk-sub").textContent=lkMode==="setup"?"4 chiffres. Tu devras le saisir à chaque ouverture.":lkMode==="confirm"?"Saisis-le une seconde fois pour vérifier.":"Saisis ton code PIN pour accéder à ton livre de bord.";
+  $("lk-err").textContent="";
+  updDots();
+  if(!$("lk-pad").children.length){
+    const keys=["1","2","3","4","5","6","7","8","9","del","0","ok"];
+    keys.forEach(k=>{
+      const b=document.createElement("button");
+      if(k==="del"){b.textContent="⌫";b.className="ghost";b.onclick=()=>{lkBuf=lkBuf.slice(0,-1);updDots();};}
+      else if(k==="ok"){b.textContent="OK";b.className="ghost";b.onclick=pinSubmit;}
+      else{b.textContent=k;b.onclick=()=>{if(lkBuf.length<4){lkBuf+=k;updDots();if(lkBuf.length===4)setTimeout(pinSubmit,180);}};}
+      $("lk-pad").appendChild(b);});}}
+function updDots(){const d=$("lk-dots").children;for(let i=0;i<4;i++)d[i].classList.toggle("f",i<lkBuf.length);}
+function pinSubmit(){
+  const err=$("lk-err");
+  if(lkMode==="unlock"){
+    if(pinHash(lkBuf)===getPin()){$("lock").classList.remove("on");}
+    else{err.textContent="Code incorrect — réessaie";lkBuf="";updDots();}
+  }else if(lkMode==="setup"){
+    lkConfirm=lkBuf;lkMode="confirm";lkBuf="";showLock();
+  }else if(lkMode==="confirm"){
+    if(lkBuf===lkConfirm){setPin(pinHash(lkBuf));$("lock").classList.remove("on");toast("PIN activé 🔒");}
+    else{lkMode="setup";lkBuf="";showLock();setTimeout(()=>{$("lk-err").textContent="Les deux codes différaient — recommence";},50);}
+  }}
+function pinSetup(){
+  lkMode="setup";lkBuf="";lkConfirm="";showLock();$("lock").classList.add("on");}
+function pinRemove(){
+  if(!getPin())return;
+  if(confirm("Désactiver le verrouillage PIN ?")){
+    setPin(null);toast("PIN désactivé");renderBateau($("app"));}}
+
+/* ============ helpers ============ */
+const $=id=>document.getElementById(id);
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");
+  clearTimeout(toast._h);toast._h=setTimeout(()=>t.classList.remove("show"),2400);}
+function nmBetween(a,b){const R=3440.1,q=x=>x*Math.PI/180,dφ=q(b.lat-a.lat),dλ=q(b.lng-a.lng);
+  const h=Math.sin(dφ/2)**2+Math.cos(q(a.lat))*Math.cos(q(b.lat))*Math.sin(dλ/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));}
+function fmtPos(lat,lng){
+  const fl=v=>{const a=Math.abs(v),d=Math.floor(a),m=(a-d)*60;return d+"°"+m.toFixed(2)+"′"+(v<0?"S":"N");};
+  const fn=v=>{const a=Math.abs(v),d=Math.floor(a),m=(a-d)*60;return d+"°"+m.toFixed(2)+"′"+(v<0?"O":"E");};
+  return fl(lat)+" "+fn(lng);}
+function parsePos(str){
+  if(!str)return null;
+  const s=String(str).replace(/\s+/g,"").replace(/[°'′]/g,"").toUpperCase().replace(/W/g,"O");
+  const hemi=s.match(/[NSEO]$/);
+  let body=hemi?s.slice(0,-1):s,h=hemi?s.slice(-1):null,dec;
+  const dot=body.indexOf(".");
+  if(dot>-1&&dot<=2){ // decimal degrees: 47.5408 or 3.2210
+    dec=parseFloat(body);
+  }else if(dot>2){ // packed deg+min: 4732.45 or 00322.10 — last 2 digits before the dot are minutes
+    const deg=parseInt(body.slice(0,dot-2),10),min=parseFloat(body.slice(dot-2));
+    if(isNaN(deg)||isNaN(min))return null;
+    dec=deg+min/60;
+  }else if(body.length>2){ // no dot, packed: 4732
+    const deg=parseInt(body.slice(0,2),10),min=parseFloat(body.slice(2));
+    if(isNaN(deg)||isNaN(min))return null;
+    dec=deg+min/60;
+  }else{
+    dec=parseFloat(body);
+  }
+  if(isNaN(dec))return null;
+  if(h==="S"||h==="O")dec=-Math.abs(dec);
+  else dec=Math.abs(dec);
+  return Math.round(dec*1e4)/1e4;}
+function destPoint(lat,lng,dist,capDeg){
+  const R=3440.1,δ=dist/R,θ=capDeg*Math.PI/180,φ=lat*Math.PI/180,λ=lng*Math.PI/180;
+  const φ2=Math.asin(Math.sin(φ)*Math.cos(δ)+Math.cos(φ)*Math.sin(δ)*Math.cos(θ));
+  const λ2=λ+Math.atan2(Math.sin(θ)*Math.sin(δ)*Math.cos(φ),Math.cos(δ)-Math.sin(φ)*Math.sin(φ2));
+  return{lat:φ2*180/Math.PI,lng:(((λ2*180/Math.PI)+540)%360)-180};}
+function dtH(a,b){const p=x=>{const[h,m]=x.split(":").map(Number);return h*60+m;};
+  let d=p(b)-p(a);if(d<0)d+=1440;return d/60;}
+function today(){return new Date().toISOString().slice(0,10);}
+function frDate(d){try{return new Date(d+"T12:00").toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short",year:"numeric"});}catch(e){return d;}}
+function hdBoat(){$("hdboat").textContent=DB.boat.name||"Mon voilier";}
+
+/* ============ maintenance ============ */
+function taskState(t){
+  const last=(DB.interventions.filter(i=>i.task===t.id).sort((a,b)=>b.ts-a.ts))[0];
+  const bh=last?last.hours:0,bm=last?last.nm:0,bts=last?last.ts:0;
+  const cands=[];
+  if(t.h!=null)cands.push({axis:"h",pct:(DB.boat.hours-bh)/t.h});
+  if(t.m!=null)cands.push({axis:"m",pct:(DB.boat.nm-bm)/t.m});
+  if(t.mo!=null&&last)cands.push({axis:"c",pct:(Date.now()-bts)/(t.mo*30.44*864e5)});
+  if(!cands.length)return{pct:0,status:"info",axis:null,label:"à planifier",ico:"info"};
+  const w=cands.reduce((a,b)=>a.pct>b.pct?a:b);
+  const status=w.pct>=1?"late":w.pct>=.85?"warn":"ok";
+  let label;
+  if(w.pct>=1)label="dépassé";
+  else if(w.axis==="h")label="reste "+Math.max(0,Math.round(t.h-(DB.boat.hours-bh)))+" h";
+  else if(w.axis==="m")label="reste "+Math.max(0,Math.round(t.m-(DB.boat.nm-bm)))+" NM";
+  else label="reste "+Math.max(0,Math.ceil(t.mo-(Date.now()-bts)/(30.44*864e5)))+" mois";
+  return{pct:Math.min(w.pct,1),status,axis:w.axis,label};}
+const AXI={h:"heures moteur",m:"milles",c:"calendrier"};
+
+/* ============ routing ============ */
+let view="journal",curNavId=null;
+function go(v,id){view=v;if(id!==undefined)curNavId=id;render();window.scrollTo({top:0});hdBoat();}
+function curNav(){return DB.navs.find(n=>n.id===curNavId);}
+function render(){
+  const app=$("app");
+  ({journal:renderJournal,newnav:renderNewNav,navdetail:renderNavDetail,
+    entretien:renderEntretien,bateau:renderBateau})[view](app);}
+
+/* ============ JOURNAL ============ */
+function renderJournal(app){
+  const navs=DB.navs.slice().sort((a,b)=>b.date.localeCompare(a.date));
+  const urgent=DB.tasks.map(t=>taskState(t)).filter(s=>s.status==="late"||s.status==="warn").length;
+  const mostRecent=navs[0];
+  app.innerHTML=`
+  <div class="hero">
+    <div class="hrow">
+      <div class="hstat"><div class="v">${DB.boat.hours.toFixed(1)}<small> h</small></div><div class="l">Heures moteur</div></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><div class="v">${DB.boat.nm.toFixed(0)}<small> NM</small></div><div class="l">Milles cumulés</div></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><div class="v">${DB.navs.length}</div><div class="l">Sorties</div></div>
+    </div>
+    ${urgent?`<div class="alert">🔧 ${urgent} entretien${urgent>1?"s":""} à surveiller — voir onglet Entretien</div>`:""}
+  </div>
+  <div class="seg">
+    <button class="on">Journal</button>
+    <button onclick="go('entretien')">Entretien</button>
+    <button onclick="go('bateau')">Bateau</button>
+  </div>
+  <h2>Journal de bord <span class="cnt">${DB.navs.length} nav.</span></h2>
+  ${navs.length?navs.slice(0,30).map(n=>{
+    const av=n.readings.some(r=>r.avarie);
+    const pts=n.readings.filter(r=>r.pos);
+    return`
+    <div class="navcard" onclick="go('navdetail','${n.id}')">
+      <div class="nc-top">
+        <div>
+          <div class="nc-route">${esc(n.from)} <span class="arr">→</span> ${esc(n.to)}</div>
+          <div class="nc-date">${frDate(n.date)}${n.crew?" · "+esc(n.crew):""}</div>
+        </div>
+        <span style="color:var(--faint);font-size:1.2rem">›</span>
+      </div>
+      <div class="nc-chips">
+        ${pts.length>1?'<span class="chip teal">🗺 trace</span>':""}
+        ${n.est?'<span class="chip purple">estime</span>':""}
+        ${av?'<span class="chip coral">⚠ avarie</span>':""}
+        ${n.readings.some(r=>r.engine)?'<span class="chip amber">⚙ moteur</span>':""}
+      </div>
+      <div class="nc-stats">
+        <div><div class="v">${(n.dist||0).toFixed(1)}</div><div class="l">NM</div></div>
+        <div><div class="v">${n.motH||0} h</div><div class="l">Moteur</div></div>
+        <div><div class="v">${n.readings.length}</div><div class="l">Relevés</div></div>
+      </div>
+    </div>`;}).join("")
+  :`<div class="empty"><span class="big">⛵</span>Aucune navigation.<br>Touchez <b style="color:var(--blue)">＋ Nouvelle nav</b> pour ouvrir le journal.</div>`}
+  <div style="height:6px"></div>`;}
+
+/* ============ NEW NAV ============ */
+function renderNewNav(app){
+  app.innerHTML=`
+  <span class="back" onclick="go('journal')">← Journal</span>
+  <h2>Nouvelle navigation</h2>
+  <div class="card">
+    <div class="row">
+      <div><label>Date</label><input type="date" id="nn-date" value="${today()}"></div>
+      <div><label>Heure départ</label><input type="time" id="nn-t"></div>
+    </div>
+    <div class="row">
+      <div><label>Port de départ</label><input id="nn-from" placeholder="Lorient"></div>
+      <div><label>Port d'arrivée</label><input id="nn-to" placeholder="Sauzon"></div>
+    </div>
+    <div class="row">
+      <div><label>Loch au départ</label><input type="number" step="0.1" id="nn-loch" placeholder="0"></div>
+      <div><label>Équipage</label><input id="nn-crew" placeholder="2 pers."></div>
+    </div>
+    <button class="btn primary" onclick="createNav()">Créer la navigation</button>
+  </div>`;}
+function createNav(){
+  const nav={id:"n"+Date.now(),date:$("nn-date").value||today(),t:$("nn-t").value,
+    loch0:parseFloat($("nn-loch").value)||0,lochE:null,
+    from:$("nn-from").value||"—",to:$("nn-to").value||"—",crew:$("nn-crew").value,
+    dist:0,motH:0,est:false,readings:[]};
+  DB.navs.push(nav);save();go("navdetail",nav.id);toast("Navigation créée");}
+
+/* ============ NAV DETAIL ============ */
+function inherit(n){
+  const p=n.readings.length?n.readings[n.readings.length-1]:null;
+  if(!p)return{loch:"",cap:"",vm:"",wind:3,sea:1,swd:"",swh:"",swp:"",press:"",sky:0,visi:"Bonne",sail:"",engine:false,obs:"",av:""};
+  return{loch:p.loch!=null?p.loch:"",cap:p.cap||"",vm:p.vm||"",wind:p.wind,sea:p.sea,
+    swd:p.swd||"",swh:p.swh||"",swp:p.swp||"",press:p.press||"",sky:SKY.indexOf(p.sky)>=0?SKY.indexOf(p.sky):0,
+    visi:p.visi||"Bonne",sail:p.sail||"",engine:!!p.engine,obs:"",av:""};}
+function trackSVG(n){
+  const pts=n.readings.filter(r=>r.pos);
+  if(pts.length<2)return"";
+  const lat=pts.map(p=>p.pos.lat),lng=pts.map(p=>p.pos.lng);
+  const minLat=Math.min(...lat),maxLat=Math.max(...lat),minLng=Math.min(...lng),maxLng=Math.max(...lng);
+  const W=320,H=210,pad=28;
+  const sx=x=>pad+(x-minLng)/((maxLng-minLng)||1e-6)*(W-2*pad);
+  const sy=y=>H-pad-(y-minLat)/((maxLat-minLat)||1e-6)*(H-2*pad);
+  const d=pts.map((p,i)=>(i?"L":"M")+sx(p.pos.lng).toFixed(1)+" "+sy(p.pos.lat).toFixed(1)).join(" ");
+  const dots=pts.map((p,i)=>`<circle cx="${sx(p.pos.lng).toFixed(1)}" cy="${sy(p.pos.lat).toFixed(1)}" r="${i===0||i===pts.length-1?6:4}" fill="${p.est?"#8b6cf0":"#0a7cff"}" stroke="#fff" stroke-width="2.2"/>`).join("");
+  const lbl=`<text x="${sx(pts[0].pos.lng)}" y="${sy(pts[0].pos.lat)-11}" font-size="9" font-weight="700" fill="#5b7285" text-anchor="middle">DÉPART</text>
+    <text x="${sx(pts[pts.length-1].pos.lng)}" y="${sy(pts[pts.length-1].pos.lat)-11}" font-size="9" font-weight="700" fill="#5b7285" text-anchor="middle">ARRIVÉE</text>`;
+  return`<svg viewBox="0 0 320 210">
+    <defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a7cff"/><stop offset="1" stop-color="#0ec4b4"/></linearGradient></defs>
+    <path d="${d}" fill="none" stroke="url(#tg)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 0" opacity=".9"/>
+    ${dots}${lbl}</svg>`;}
+function renderNavDetail(app){
+  const n=curNav();if(!n){go("journal");return;}
+  app.innerHTML=`
+  <span class="back" onclick="go('journal')">← Journal</span>
+  ${trackSVG(n)?`<div class="map">${trackSVG(n)}
+    <div class="mlegend"><span class="ml">● observé</span><span class="ml" style="color:#8b6cf0">● estimé</span>
+    <span class="ml">${(n.dist||0).toFixed(1)} NM</span></div></div>`:""}
+  <div class="card">
+    <div class="nc-route" style="font-size:1.05rem">${esc(n.from)} <span class="arr">→</span> ${esc(n.to)}</div>
+    <div class="nc-date">${frDate(n.date)}</div>
+    <div class="row">
+      <div><label>Loch départ</label><input type="number" step="0.1" id="nd-l0" value="${n.loch0||""}"></div>
+      <div><label>Loch arrivée</label><input type="number" step="0.1" id="nd-l1" value="${n.lochE!=null?n.lochE:""}"></div>
+    </div>
+    <div class="datarow">
+      <button class="btn soft mini" onclick="calcNav('${n.id}')">📏 Calculer distance</button>
+      <button class="btn soft mini" onclick="pushCounters('${n.id}')">⬆ Compteurs bateau</button>
+    </div>
+    <p class="muted" style="margin-top:12px"><b style="color:var(--blue)">${(n.dist||0).toFixed(1)} NM</b> · <b style="color:var(--blue)">${n.motH||0} h</b> moteur ${n.est?'· <span style="color:var(--purple);font-weight:700">distance à l\'estime</span>':""}</p>
+  </div>
+  <h2>Nouveau relevé</h2>
+  <div class="card">${readingForm(n,inherit(n))}</div>
+  <h2>Relevés <span class="cnt">${n.readings.length}</span></h2>
+  ${n.readings.slice().reverse().map(r=>readingHTML(r)).join("")||`<div class="empty"><span class="big">🧭</span>Le premier relevé se saisit ci-dessus.<br>Chaque relevé hérite des conditions du précédent.</div>`}
+  <div style="height:8px"></div>`;}
+function readingForm(n,p){
+  return`
+  <div class="row">
+    <div><label>Heure</label><input type="time" id="rf-time" value="${new Date().toTimeString().slice(0,5)}"></div>
+    <div><label>Loch total</label><input type="number" step="0.1" id="rf-loch" value="${p.loch}"></div>
+  </div>
+  <div class="row">
+    <div><label>Type de point</label>
+      <select id="rf-est" onchange="document.getElementById('rf-gpsbox').classList.toggle('hidden',this.value==='est')">
+        <option value="obs">Observé · GPS</option>
+        <option value="est">Estimé · compas</option>
+      </select></div>
+    <div><label>Cap compas</label><input type="number" id="rf-cap" value="${p.cap}"></div>
+  </div>
+  <div id="rf-gpsbox">
+    <label>Position</label>
+    <div class="row">
+      <div><input id="rf-lat" placeholder="47°32.45'N"></div>
+      <div><input id="rf-lng" placeholder="003°22.10'O"></div>
+    </div>
+    <button class="btn soft mini" style="margin-top:9px" onclick="gpsFix()">📍 Position GPS</button>
+  </div>
+  <div class="row">
+    <div><label>Vent · Beaufort</label><select id="rf-wind">${BEAUFORT.map((b,i)=>`<option value="${i}" ${p.wind==i?"selected":""}>${i} — ${b}</option>`).join("")}</select></div>
+    <div><label>Vitesse · kt</label><input type="number" step="0.1" id="rf-vm" value="${p.vm}"></div>
+  </div>
+  <div class="row">
+    <div><label>Mer · Douglas</label><select id="rf-sea">${DOUGLAS.map((d,i)=>`<option value="${i}" ${p.sea==i?"selected":""}>${i} — ${d}</option>`).join("")}</select></div>
+    <div><label>Temps</label><select id="rf-sky">${SKY.map((s,i)=>`<option value="${i}" ${p.sky==i?"selected":""}>${s}</option>`).join("")}</select></div>
+  </div>
+  <label>Houle</label>
+  <div class="row">
+    <div><input id="rf-swd" placeholder="Direction" value="${esc(p.swd)}"></div>
+    <div><input id="rf-swh" placeholder="H m" value="${esc(p.swh)}"></div>
+    <div><input id="rf-swp" placeholder="Période s" value="${esc(p.swp)}"></div>
+  </div>
+  <div class="row">
+    <div><label>Pression hPa</label><input type="number" id="rf-press" value="${p.press}"></div>
+    <div><label>Visibilité</label><select id="rf-visi">${["Bonne","Moyenne","Mauvaise"].map(v=>`<option ${p.visi===v?"selected":""}>${v}</option>`).join("")}</select></div>
+  </div>
+  <div class="row">
+    <div><label>Voilure</label><input id="rf-sail" placeholder="GV + genois" value="${esc(p.sail)}"></div>
+    <div><label>Moteur</label><select id="rf-eng"><option value="0" ${p.engine?"":"selected"}>Arrêté</option><option value="1" ${p.engine?"selected":""}>En marche</option></select></div>
+  </div>
+  <label>Observations</label>
+  <textarea id="rf-obs" placeholder="Remarques du bord…">${esc(p.obs)}</textarea>
+  <label style="color:var(--coral)">Problème / avarie ⚠</label>
+  <textarea id="rf-av" style="border-color:#ffc9d3" placeholder="Décrire l'avarie…">${esc(p.av)}</textarea>
+  <button class="btn teal" onclick="addReading('${n.id}')">＋ Ajouter le relevé</button>`;}
+function readingHTML(r){
+  return`
+  <div class="reading">
+    <div class="rhead">
+      <div class="rtime">${r.time||"—"}</div>
+      <span class="rsrc ${r.est?"est":"obs"}">${r.est?"estimé":"observé"}</span>
+    </div>
+    <div class="rgrid">
+      ${r.pos?`<span><b>${fmtPos(r.pos.lat,r.pos.lng)}</b></span>`:""}
+      ${r.loch!=null?`<span>loch <b>${r.loch}</b></span>`:""}
+      ${r.cap?`<span>cap <b>${r.cap}°</b>${r.cv!=null?` → <b>${r.cv}°</b> vrai</span>`:""}`:""}
+      ${r.vm?`<span><b>${r.vm} kt</b></span>`:""}
+    </div>
+    <div class="rgrid">
+      <span class="wchip">🌬 ${r.wind} Bft</span>
+      <span class="wchip">🌊 ${r.sea} D</span>
+      ${r.press?`<span class="wchip">🎚 ${r.press} hPa</span>`:""}
+      ${r.skyIdx!=null?`<span class="wchip">${SKY[r.skyIdx]||""}</span>`:""}
+      ${r.visi?`<span class="wchip">👁 ${esc(r.visi)}</span>`:""}
+      ${r.swh?`<span class="wchip">~ houle ${esc(r.swh)} m ${esc(r.swd||"")}</span>`:""}
+      ${r.engine?'<span class="wchip" style="background:var(--amberbg);color:#c47f00">⚙ moteur</span>':""}
+      ${r.sail?`<span class="wchip">⛵ ${esc(r.sail)}</span>`:""}
+    </div>
+    ${r.obs?`<div class="muted" style="margin-top:8px">${esc(r.obs)}</div>`:""}
+    ${r.avarie?`<div class="avbox">⚠ ${esc(r.avarie)}</div>`:""}
+  </div>`;}
+function gpsFix(){
+  if(!navigator.geolocation)return toast("GPS indisponible ici");
+  navigator.geolocation.getCurrentPosition(p=>{
+    $("rf-lat").value=p.coords.latitude.toFixed(4);
+    $("rf-lng").value=p.coords.longitude.toFixed(4);toast("Position relevée");
+  },()=>toast("Position refusée / indisponible"),{timeout:8000});}
+function addReading(id){
+  const n=DB.navs.find(x=>x.id===id);
+  const est=$("rf-est").value==="est";
+  const time=$("rf-time").value||"—";
+  const cap=parseFloat($("rf-cap").value);
+  const loch=parseFloat($("rf-loch").value);
+  let pos=null;
+  if(!est){
+    if($("rf-lat").value&&$("rf-lng").value){
+      const la=parsePos($("rf-lat").value),lo=parsePos($("rf-lng").value);
+      if(la==null||lo==null)return toast("Format de position non reconnu");
+      pos={lat:la,lng:lo};}
+  }else{
+    if(isNaN(cap))return toast("Estime : renseignez le cap compas");
+    if(isNaN(loch))return toast("Estime : renseignez le loch");
+    const prev=[...n.readings].reverse().find(r=>r.pos);
+    if(prev&&prev.pos){
+      const d=Math.max(0,loch-(prev.loch!=null?prev.loch:loch));
+      const cv=Math.round(((cap+(DB.boat.decl||0))%360+360)%360);
+      pos=destPoint(prev.pos.lat,prev.pos.lng,d,cv);n.est=true;
+    }else return toast("Estime impossible : saisissez d'abord un point observé");}
+  n.readings.push({
+    id:"r"+Date.now(),time,est,pos,loch:isNaN(loch)?null:loch,
+    cap:isNaN(cap)?null:Math.round(cap),
+    cv:isNaN(cap)?null:Math.round(((cap+(DB.boat.decl||0))%360+360)%360),
+    vm:parseFloat($("rf-vm").value)||null,
+    wind:parseInt($("rf-wind").value),sea:parseInt($("rf-sea").value),
+    skyIdx:parseInt($("rf-sky").value),sky:SKY[parseInt($("rf-sky").value)],
+    swd:$("rf-swd").value,swh:$("rf-swh").value,swp:$("rf-swp").value,
+    press:$("rf-press").value,visi:$("rf-visi").value,
+    sail:$("rf-sail").value,engine:$("rf-eng").value==="1",
+    obs:$("rf-obs").value,avarie:$("rf-av").value.trim()});
+  save();toast("Relevé ajouté"+(est?" (estime)":""));go("navdetail",n.id);}
+function calcNav(id){
+  const n=DB.navs.find(x=>x.id===id);
+  const l0=parseFloat($("nd-l0").value),l1=parseFloat($("nd-l1").value);
+  if(isNaN(l0)||isNaN(l1))return toast("Renseignez les deux lochs");
+  if(l1<l0)return toast("Loch arrivée < départ ?");
+  n.loch0=l0;n.lochE=l1;n.dist=+(l1-l0).toFixed(1);n.est=true;
+  let h=0;const rs=n.readings.filter(r=>r.time&&r.time!=="—");
+  for(let i=1;i<rs.length;i++){if(rs[i-1].engine)h+=dtH(rs[i-1].time,rs[i].time);}
+  n.motH=+h.toFixed(1);
+  save();toast("Distance : "+n.dist+" NM (source : loch)");go("navdetail",n.id);}
+function pushCounters(id){
+  const n=DB.navs.find(x=>x.id===id);
+  if(!n.dist&&!n.motH)return toast("Calculez la distance d'abord");
+  DB.boat.nm=+(DB.boat.nm+(n.dist||0)).toFixed(1);
+  DB.boat.hours=+(DB.boat.hours+(n.motH||0)).toFixed(1);
+  save();toast("Compteurs : "+DB.boat.nm.toFixed(0)+" NM / "+DB.boat.hours.toFixed(1)+" h");go("navdetail",n.id);}
+
+/* ============ ENTRETIEN ============ */
+function renderEntretien(app){
+  const items=DB.tasks.map(t=>({t,s:taskState(t)})).sort((a,b)=>(b.s.pct||0)-(a.s.pct||0));
+  const late=items.filter(x=>x.s.status==="late").length,warn=items.filter(x=>x.s.status==="warn").length;
+  app.innerHTML=`
+  <div class="seg">
+    <button onclick="go('journal')">Journal</button>
+    <button class="on">Entretien</button>
+    <button onclick="go('bateau')">Bateau</button>
+  </div>
+  <div class="hero" style="background:linear-gradient(135deg,${late?"#ff5a76":warn?"#f5a623":"#0fb57d"},${late?"#e63e5c":warn?"#f08a00":"#0ec4b4"})">
+    <div class="hrow">
+      <div class="hstat"><div class="v">${late}</div><div class="l">Dépassés</div></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><div class="v">${warn}</div><div class="l">Imminents</div></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><div class="v">${items.length-late-warn}</div><div class="l">OK</div></div>
+    </div>
+    <div class="alert">${late||warn?"Le premier compteur atteint déclenche l'échéance — heures, milles ou calendrier.":"Tout est à jour ⛵ Pensez à marquer les interventions « ✓ Fait »."}</div>
+  </div>
+  <h2>Plan d'entretien <span class="cnt">${items.length} tâches</span></h2>
+  ${items.map(({t,s})=>`
+  <div class="task">
+    <div class="tico ${s.status}">${CAT_ICONS[t.cat]||"🔧"}</div>
+    <div class="tbody">
+      <div class="tcat">${esc(t.cat)}</div>
+      <div class="tname">${esc(t.l)}</div>
+      <div class="tnext">${t.h?"⏱ "+t.h+" h":""}${t.m?" · 📏 "+t.m+" NM":""}${t.mo?" · 📅 "+t.mo+" mois":""}${s.axis?" — <b>"+AXI[s.axis]+"</b> · "+s.label:""}</div>
+      <div class="bar"><i class="${s.status}" style="width:${Math.round((s.pct||0)*100)}%"></i></div>
+    </div>
+    <div class="tbtn">
+      <span class="badge ${s.status}">${s.status==="late"?"DÉPASSÉ":s.status==="warn"?"IMMINENT":s.status==="ok"?"OK":"À PLANIFIER"}</span>
+      <button class="btn soft mini" onclick="doneTask('${t.id}')">✓ Fait</button>
+    </div>
+  </div>`).join("")}
+  <h2>Historique <span class="cnt">${DB.interventions.length}</span></h2>
+  ${DB.interventions.slice(-12).reverse().map(i=>{
+    const t=DB.tasks.find(x=>x.id===i.task);
+    return`<div class="reading"><div class="rhead">
+      <div class="rtime">${esc(t?t.l:i.task)}</div>
+      <span class="rsrc obs">${new Date(i.ts).toLocaleDateString("fr-FR")}</span></div>
+      <div class="rgrid"><span>compteurs relevés : <b>${i.hours} h · ${i.nm} NM</b></span>${i.notes?`<span>📝 ${esc(i.notes)}</span>`:""}</div></div>`;
+  }).join("")||`<div class="empty"><span class="big">🧰</span>Touchez « ✓ Fait » sur une tâche :<br>l'intervention s'archive avec le relevé des compteurs.</div>`}`;}
+function doneTask(id){
+  const t=DB.tasks.find(x=>x.id===id);
+  const notes=prompt("Notes (pièces, coût…) — optionnel :","");
+  DB.interventions.push({task:id,ts:Date.now(),hours:DB.boat.hours,nm:DB.boat.nm,notes:notes||""});
+  save();toast("« "+t.l+" » enregistré ✓");render();}
+
+/* ============ BATEAU ============ */
+function renderBateau(app){
+  const b=DB.boat;
+  app.innerHTML=`
+  <div class="seg">
+    <button onclick="go('journal')">Journal</button>
+    <button onclick="go('entretien')">Entretien</button>
+    <button class="on">Bateau</button>
+  </div>
+  <div class="card">
+    <label>Nom du bateau</label><input id="bt-name" value="${esc(b.name)}" placeholder="Perl'Ana">
+    <div class="row">
+      <div><label>Modèle</label><input id="bt-model" value="${esc(b.model)}" placeholder="Oceanis 373"></div>
+      <div><label>Année</label><input id="bt-year" value="${esc(b.year)}" placeholder="2004"></div>
+    </div>
+    <label>Motorisation</label><input id="bt-engine" value="${esc(b.engine)}" placeholder="Yanmar 3YM30, sail-drive">
+    <div class="row">
+      <div><label>Compteur moteur · h</label><input type="number" step="0.1" id="bt-hours" value="${b.hours}"></div>
+      <div><label>Total milles · NM</label><input type="number" step="0.1" id="bt-nm" value="${b.nm}"></div>
+    </div>
+    <label>Correction compas · ° Est positif</label><input type="number" id="bt-decl" value="${b.decl}">
+    <button class="btn primary" onclick="saveBoat()">Enregistrer</button>
+  </div>
+  <h2>Sécurité</h2>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div>
+        <div style="font-weight:800;font-size:.92rem">🔒 Verrouillage par code PIN</div>
+        <div class="muted" style="margin-top:3px">${getPin()?"Le code PIN est demandé à l'ouverture de l'appli.":"Protège l'accès à ton livre de bord sur ce téléphone."}</div>
+      </div>
+    </div>
+    <div class="datarow">
+      ${getPin()
+        ?`<button class="btn soft mini" onclick="pinSetup()">Changer le code</button>
+          <button class="btn soft mini dangertxt" onclick="pinRemove()">Désactiver</button>`
+        :`<button class="btn primary" style="width:auto;padding:10px 18px;margin-top:0;font-size:.82rem" onclick="pinSetup()">Définir un code PIN</button>`}
+    </div>
+    <p class="faint" style="margin-top:10px">Le code est stocké haché sur cet appareil uniquement. Sans lui, les données restent récupérables via l'export — en cas d'oubli du code, réinstalle simplement l'appli.</p>
+  </div>
+  <h2>Données</h2>
+  <div class="card">
+    <div class="diag">Version ${VERSION} · ${DB.navs.length} navigations · ${DB.navs.reduce((a,n)=>a+n.readings.length,0)} relevés · ${DB.interventions.length} interventions<br>
+    Les données restent sur cet appareil — exportez régulièrement.</div>
+    <div class="datarow">
+      <button class="btn soft mini" onclick="expJSON()">⬇ JSON</button>
+      <button class="btn soft mini" onclick="expCSV()">⬇ CSV</button>
+      <button class="btn soft mini" onclick="impJSON()">⬆ Importer</button>
+      <button class="btn soft mini dangertxt" onclick="wipe()">Tout effacer</button>
+    </div>
+  </div>
+  <div style="height:8px"></div>`;}
+function saveBoat(){
+  DB.boat={name:$("bt-name").value||"Mon voilier",model:$("bt-model").value,year:$("bt-year").value,
+    engine:$("bt-engine").value,hours:parseFloat($("bt-hours").value)||0,
+    nm:parseFloat($("bt-nm").value)||0,decl:parseFloat($("bt-decl").value)||0};
+  save();toast("Bateau enregistré ✓");go("bateau");}
+function dl(name,content,type){
+  try{const a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob([content],{type}));
+    a.download=name;a.click();toast("Export : "+name);
+  }catch(e){toast("Export bloqué dans l'aperçu — ouvrez le fichier dans un navigateur");}}
+function expJSON(){dl("anchor-"+today()+".json",JSON.stringify(DB,null,2),"application/json");}
+function expCSV(){
+  let c="date;depart;arrivee;distance_NM;heures_moteur;releves;avarie\n";
+  DB.navs.forEach(n=>c+=[n.date,n.from,n.to,n.dist,n.motH,n.readings.length,n.readings.some(r=>r.avarie)?"OUI":""].join(";")+"\n");
+  dl("anchor-"+today()+".csv",c,"text/csv");}
+function impJSON(){
+  const inp=document.createElement("input");inp.type="file";inp.accept=".json";
+  inp.onchange=()=>{const f=inp.files[0];if(!f)return;
+    const fr=new FileReader();
+    fr.onload=()=>{try{const d=JSON.parse(fr.result);
+      if(!d.boat||!Array.isArray(d.navs))throw 0;
+      DB=d;DB.navs=DB.navs||[];DB.interventions=DB.interventions||[];
+      DB.tasks=DB.tasks&&DB.tasks.length?DB.tasks:CATALOG.map(t=>({...t,active:true}));
+      save();toast("Import réussi ✓");render();hdBoat();
+    }catch(e){toast("Fichier invalide")}};
+    fr.readAsText(f)};
+  inp.click();}
+function wipe(){
+  if(confirm("Effacer toutes les données ? Action définitive.")){
+    DB=freshDB();save();toast("Données effacées");go("journal");}}
+hdBoat();render();showLock();
+</script>
